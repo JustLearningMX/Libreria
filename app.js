@@ -12,7 +12,12 @@ app.use(bodyParser.json());
 /**CONFIGURACIÓN DE MONGOOSE */
 const mongoose = require('mongoose');//Importamos
 //Nos conectamos
-mongoose.connect(`mongodb+srv://${process.env.DBUSER}:${process.env.PASSWORD}@cluster0.0l8wy.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`);
+//mongoose.connect(`mongodb+srv://${process.env.DBUSER}:${process.env.PASSWORD}@cluster0.0l8wy.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(
+  process.env.MONGO_URI, // obtiene la url de conexión desde las variables de entorno
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+);
+
 //Activamos opción de debuggeo para errores
 mongoose.set("debug", true);
 /**CONFIGURACIÓN DE MONGOOSE */
